@@ -1,0 +1,9 @@
+{
+  "appId": "id.lapakprint.app",
+  "appName": "LapakPrint",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  }
+}
