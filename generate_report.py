@@ -638,6 +638,8 @@ def build_report():
     links = [
         ("Web Application Live (Vercel)", "https://lapakprint-app.vercel.app"),
         ("Tautan Unduhan Langsung APK", "https://lapakprint-app.vercel.app/downloads/LapakPrint.apk"),
+        ("GitHub Repository (Public)", "https://github.com/zulzaladdera-MLearning/lapakprint-app"),
+        ("CI/CD Pipeline (GitHub Actions)", "https://github.com/zulzaladdera-MLearning/lapakprint-app/actions"),
         ("Ngrok Cross-Device Testing Tunnel", "https://appealing-issue-shimmer.ngrok-free.dev"),
         ("Local 9router AI Gateway", "http://127.0.0.1:20128"),
         ("Local Hermes Agent Container", "http://localhost:8642"),
