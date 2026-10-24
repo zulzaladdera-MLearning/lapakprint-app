@@ -11,19 +11,34 @@ services:
     networks:
       - lapakprint-net
 
-  # 2. Web UI Interface (Open WebUI - Modern ChatGPT-like Browser UI)
+  # 2. 9router Gateway Service in Docker
+  # Menghubungkan gateway AI terpadu di dalam Docker network (Port 20129 dipetakan agar tidak bentrok dengan host)
+  nine-router:
+    image: decolua/9router:latest
+    container_name: nine-router
+    ports:
+      - "20129:20128"
+    environment:
+      - PORT=20128
+    volumes:
+      - nine-router-data:/root/.9router
+    restart: unless-stopped
+    networks:
+      - lapakprint-net
+
+  # 3. Web UI Interface (Open WebUI - Modern ChatGPT-like Browser UI)
   hermes-web:
     image: ghcr.io/open-webui/open-webui:main
     container_name: hermes-webui
     ports:
       - "8080:8080"
     environment:
-      # Terhubung ke 9router lokal atau backend AI OpenAI-compatible
-      - OPENAI_API_BASE_URL=http://host.docker.internal:20128/v1
+      # Terhubung langsung ke nine-router di dalam Docker network
+      - OPENAI_API_BASE_URL=http://nine-router:20128/v1
       - OPENAI_API_KEY=sk-lapakprint-hermes
-      # Terhubung langsung juga ke Ollama lokal di laptop
+      # Terhubung juga ke Ollama lokal di laptop Windows
       - OLLAMA_BASE_URL=http://host.docker.internal:11434
-      # Nonaktifkan autentikasi login agar langsung siap pakai
+      # Nonaktifkan login form agar langsung terbuka
       - WEBUI_AUTH=false
       - WEBUI_NAME=LapakPrint Hermes AI Studio
     extra_hosts:
@@ -32,6 +47,7 @@ services:
       - open-webui-data:/app/backend/data
     depends_on:
       - hermes-backend
+      - nine-router
     restart: unless-stopped
     networks:
       - lapakprint-net
@@ -42,3 +58,4 @@ networks:
 
 volumes:
   open-webui-data:
+  nine-router-data:
