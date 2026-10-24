@@ -20,6 +20,7 @@ services:
       - "20129:20128"
     environment:
       - PORT=20128
+      - INITIAL_PASSWORD=lapakprint123
     volumes:
       - nine-router-data:/root/.9router
     restart: unless-stopped
