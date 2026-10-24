@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  # 1. Hermes Agent Service (Nous Research Reasoning Engine)
+  hermes-backend:
+    image: nousresearch/hermes-agent:latest
+    container_name: hermes-service
+    ports:
+      - "8642:8642"
+    restart: unless-stopped
+    networks:
+      - lapakprint-net
+
+  # 2. Web UI Interface (Open WebUI - Modern ChatGPT-like Browser UI)
+  hermes-web:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: hermes-webui
+    ports:
+      - "8080:8080"
+    environment:
+      # Terhubung ke 9router lokal atau backend AI OpenAI-compatible
+      - OPENAI_API_BASE_URL=http://host.docker.internal:20128/v1
+      - OPENAI_API_KEY=sk-lapakprint-hermes
+      # Terhubung langsung juga ke Ollama lokal di laptop
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      # Nonaktifkan autentikasi login agar langsung siap pakai
+      - WEBUI_AUTH=false
+      - WEBUI_NAME=LapakPrint Hermes AI Studio
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - open-webui-data:/app/backend/data
+    depends_on:
+      - hermes-backend
+    restart: unless-stopped
+    networks:
+      - lapakprint-net
+
+networks:
+  lapakprint-net:
+    driver: bridge
+
+volumes:
+  open-webui-data:
