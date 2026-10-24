@@ -53,6 +53,25 @@ services:
     networks:
       - lapakprint-net
 
+  # 4. Ngrok Secure Tunneling Service
+  # Mengekspos Hermes AI Studio ke URL publik HTTPS dengan custom static domain
+  ngrok-tunnel:
+    image: ngrok/ngrok:latest
+    container_name: lapakprint-ngrok
+    restart: unless-stopped
+    networks:
+      - lapakprint-net
+    environment:
+      - NGROK_AUTHTOKEN=3Kl5dq95ni1boT2tuLPBjMiNRlq_5GfN9wPZ3EtnPWxfcfZkb
+    command:
+      - "http"
+      - "hermes-webui:8080"
+      - "--domain=appealing-issue-shimmer.ngrok-free.dev"
+    ports:
+      - "4040:4040"
+    depends_on:
+      - hermes-web
+
 networks:
   lapakprint-net:
     driver: bridge
