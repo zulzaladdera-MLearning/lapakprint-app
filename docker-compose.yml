@@ -36,7 +36,7 @@ services:
     environment:
       # Terhubung langsung ke nine-router di dalam Docker network
       - OPENAI_API_BASE_URL=http://nine-router:20128/v1
-      - OPENAI_API_KEY=sk-lapakprint-hermes
+      - OPENAI_API_KEY=sk-0480ac72892daa9b-2s3nyc-5474ac73
       # Terhubung juga ke Ollama lokal di laptop Windows
       - OLLAMA_BASE_URL=http://host.docker.internal:11434
       # Nonaktifkan login form agar langsung terbuka
