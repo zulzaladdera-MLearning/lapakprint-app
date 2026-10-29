@@ -6,7 +6,7 @@ export default function FailoverChatTab() {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: 'Halo! Saya Asisten AI LapakPrint terdistribusi. Didukung oleh orkestrasi Google Gemini 3.8 Flash High (9router), OpenRouter, SiliconFlow, dan Ollama Lokal. Ada yang ingin Anda konsultasikan seputar spesifikasi kertas, jilid skripsi, atau kalkulasi biaya cetak?',
+      content: 'Halo! Saya Asisten AI LapakPrint terdistribusi. Didukung oleh orkestrasi Google Gemini 3.8 Flash High (9router), xKiro Gateway, OpenRouter, SiliconFlow, dan Ollama Lokal. Ada yang ingin Anda konsultasikan seputar spesifikasi kertas, jilid skripsi, atau kalkulasi biaya cetak?',
       provider: '9router (Google Gemini 3.8 Flash High)',
       latencyMs: 140
     }

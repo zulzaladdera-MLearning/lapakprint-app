@@ -2,9 +2,10 @@
  * Distributed AI Round-Robin & Failover Router Service
  * Mengorkestrasi inferensi cerdas lintas provider:
  * 1. Primary: 9router AI Gateway (Google Gemini 3.8 Flash High)
- * 2. Failover Cloud 1: OpenRouter API
- * 3. Failover Cloud 2: SiliconFlow API
- * 4. Local Engine: Ollama host (hermes3:3b / qwen2.5-coder:1.5b) & LMStudio
+ * 2. Failover Cloud 1: xKiro AI Gateway (Multi-Model Hub, DeepSeek/GPT)
+ * 3. Failover Cloud 2: OpenRouter API
+ * 4. Failover Cloud 3: SiliconFlow API
+ * 5. Local Engine: Ollama host (hermes3:3b / qwen2.5-coder:1.5b) & LMStudio
  */
 
 export const AI_PROVIDERS = [
@@ -15,6 +16,14 @@ export const AI_PROVIDERS = [
     apiKey: import.meta.env.VITE_9ROUTER_API_KEY || 'sk-0480ac72892daa9b-2s3nyc-5474ac73',
     model: 'ag/gemini-3.8-flash-high',
     type: 'cloud_primary'
+  },
+  {
+    id: 'xkiro',
+    name: 'xKiro Gateway (DeepSeek/GPT-4o Multi-Hub)',
+    endpoint: import.meta.env.VITE_XKIRO_ENDPOINT || 'https://api.xkiro.com/v1/chat/completions',
+    apiKey: import.meta.env.VITE_XKIRO_API_KEY || 'sk-xkiro-lapakprint-demo',
+    model: import.meta.env.VITE_XKIRO_MODEL || 'deepseek-ai/DeepSeek-V3',
+    type: 'cloud_failover'
   },
   {
     id: 'openrouter',

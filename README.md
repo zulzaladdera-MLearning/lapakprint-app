@@ -16,18 +16,27 @@
 
 ---
 
-## 🚀 Ekosistem & Orkestrasi Teknologi (7 Komponen)
+## 🚀 Ekosistem & Orkestrasi Teknologi
 
-Proyek ini dibangun dan diorkestrasi menggunakan 7 pilar instrumen:
+Proyek ini dibangun dan diorkestrasi menggunakan arsitektur modern berstandar industri:
 
-1. **Cursor**: AI Code Editor untuk refactoring katalog, pembersihan atribut Shopee ke LapakPrint, dan penyusunan komponen UI React.
+1. **Cursor**: AI Code Editor untuk refactoring arsitektur komponen modular (< 500 baris/file).
 2. **Antigravity**: Otonomous agent harness untuk automasi build pipeline, konfigurasi toolchain Java 21, dan integrasi Vercel CLI.
 3. **Hermes Agent**: Reasoning engine otonom dari Nous Research (`nousresearch/hermes-agent:latest`) pada port `8642`.
-4. **Docker**: Platform kontainerisasi untuk mengisolasi service `hermes-service` menggunakan Docker Desktop Engine v29.7.2.
-5. **9router**: AI Gateway lokal (`http://127.0.0.1:20128`) untuk efisiensi perutean prompt LLM.
-6. **Ngrok**: Secure reverse proxy tunneling (`https://appealing-issue-shimmer.ngrok-free.dev`) untuk pengujian tampilan responsif di ponsel pintar fisik.
-7. **Multiplatform Apps**:
-   - **Web App**: Dibangun dengan Vite + React 18 + Tailwind CSS, di-deploy di Vercel.
+4. **Docker**: Platform kontainerisasi untuk mengisolasi multi-service: `hermes-service`, `nine-router`, `hermes-webui`, dan `lapakprint-ngrok`.
+5. **Distributed AI Failover Pool**:
+   - **Primary**: 9router Local Docker Gateway (`ag/gemini-3.8-flash-high`)
+   - **Cloud Failover 1**: **xKiro AI Gateway** (`https://api.xkiro.com/v1`, 103+ model hub)
+   - **Cloud Failover 2**: OpenRouter Aggregator (`gemini-2.0-flash-exp:free`)
+   - **Cloud Failover 3**: SiliconFlow Cloud Engine (`Qwen2.5-7B-Instruct`)
+   - **Local Engine**: Ollama Hermes 3:3B & LMStudio
+   - **Image Diffusion**: Runware Fast FLUX 300 DPI Poster Studio
+6. **Hybrid Cloud Storage**:
+   - **Cloudinary CDN (5 GB Free Tier)**: Direct unsigned upload untuk file biner PDF dokumen dan poster.
+   - **Supabase PostgreSQL (< 1 GB Meta)**: Persistensi relasional data pesanan, status cetak, dan URL CDN.
+7. **Ngrok & Multiplatform Apps**:
+   - **Secure Tunneling**: Reverse proxy (`https://appealing-issue-shimmer.ngrok-free.dev`) untuk akses mobile remote.
+   - **Web App**: Dibangun dengan Vite + React 18 + Tailwind CSS, live di Vercel.
    - **Mobile App**: Dibungkus menggunakan Capacitor (`id.lapakprint.app`), dikompilasi dengan Microsoft OpenJDK 21 dan Android SDK 36 menghasilkan `LapakPrint.apk`.
 
 ---
