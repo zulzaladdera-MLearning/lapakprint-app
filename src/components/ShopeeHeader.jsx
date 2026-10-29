@@ -217,6 +217,7 @@ export default function ShopeeHeader({
 
           {/* Quick Search Suggestions underneath */}
           <div className="flex items-center space-x-3 text-[11px] text-white/90 mt-1 pl-1 hidden sm:flex truncate">
+            <span onClick={() => onNavigateFeature?.('ai-studio')} className="hover:text-amber-300 font-bold cursor-pointer text-amber-200 flex items-center gap-1">✨ AI Studio (Gemini-Runware)</span>
             <span onClick={() => onNavigateFeature?.('hardcover')} className="hover:text-white cursor-pointer">Hard Cover Skripsi Emas</span>
             <span onClick={() => onNavigateFeature?.('draft')} className="hover:text-white cursor-pointer">Print A4 80gr PaperOne</span>
             <span onClick={() => onNavigateFeature?.('spiral')} className="hover:text-white cursor-pointer">Jilid Spiral Kawat</span>

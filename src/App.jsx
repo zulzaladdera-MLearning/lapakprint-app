@@ -21,6 +21,8 @@ import AllServicesView from './components/features/AllServicesView';
 import ProductDetailView from './components/ProductDetailView';
 import UserProfileMobileView from './components/UserProfileMobileView';
 import MobileBottomNav from './components/MobileBottomNav';
+import MultimodalPosterStudio from './features/ai-studio/MultimodalPosterStudio';
+import { savePrintOrderToDatabase } from './services/supabase';
 import { INITIAL_ORDERS, MOCK_USERS } from './data/mockData';
 import { Bell } from 'lucide-react';
 
@@ -96,11 +98,18 @@ export default function App() {
   };
 
   // Student completes QRIS payment
-  const handlePaymentSuccess = (confirmedOrder) => {
+  const handlePaymentSuccess = async (confirmedOrder) => {
     setIsQRISOpen(false);
     setOrders((prev) => [confirmedOrder, ...prev]);
     setActiveNavTab('orders');
     showToast(`🎉 Pembayaran Lunas Rp ${confirmedOrder.pricing.total.toLocaleString('id-ID')} via QRIS! Order #${confirmedOrder.id} masuk antrean percetakan.`);
+    
+    // Simpan metadata ke Supabase Relational Database
+    try {
+      await savePrintOrderToDatabase(confirmedOrder, confirmedOrder.cloudinary);
+    } catch (e) {
+      console.warn('Supabase background sync notice:', e);
+    }
   };
 
   // Mitra updates order production status
@@ -237,6 +246,11 @@ export default function App() {
                 onStartOrder={handleSelectPartnerForOrder}
                 onSelectProduct={setSelectedProductDetail}
                 onAddToCart={(prod, qty) => showToast(`🛒 Berhasil menambahkan ${qty} rangkap "${prod.title}" ke keranjang!`)}
+              />
+            ) : activeFeatureView === 'ai-studio' ? (
+              <MultimodalPosterStudio
+                onBack={() => setActiveFeatureView(null)}
+                onStartOrderWithPoster={handleSelectPartnerForOrder}
               />
             ) : activeFeatureView === 'voucher' ? (
               <VoucherCenterView

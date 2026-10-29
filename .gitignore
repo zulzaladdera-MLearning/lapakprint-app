@@ -28,6 +28,7 @@ android/app/*.iml
 # Python / Docx generator temp
 __pycache__/
 *.pyc
+~$*
 
 # System files
 .DS_Store

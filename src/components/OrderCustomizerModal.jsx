@@ -4,6 +4,7 @@ import {
   ArrowRight, Bike, Check, AlertCircle, Info 
 } from 'lucide-react';
 import { PRESET_DOCUMENTS, PRICING_RULES } from '../data/mockData';
+import CloudinaryUploadBox from '../features/customizer/CloudinaryUploadBox';
 
 export default function OrderCustomizerModal({ 
   isOpen, 
@@ -17,6 +18,7 @@ export default function OrderCustomizerModal({
   // Selected document state
   const [selectedDocPreset, setSelectedDocPreset] = useState(PRESET_DOCUMENTS[0]);
   const [customFile, setCustomFile] = useState(null);
+  const [cloudinaryMetadata, setCloudinaryMetadata] = useState(null);
 
   // Configuration options
   const [paperType, setPaperType] = useState('A4 80gr');
@@ -100,6 +102,7 @@ export default function OrderCustomizerModal({
       pickupPin: randomPin,
       status: 'pending',
       notes,
+      cloudinary: cloudinaryMetadata,
       pricing: {
         printCost: totalPrintCost,
         bindingCost: totalBindingCost,
@@ -184,20 +187,24 @@ export default function OrderCustomizerModal({
               ))}
             </div>
 
-            <div className="border border-dashed border-sky-300 rounded-xl p-3 text-center bg-sky-50/30 hover:bg-sky-50/70 transition">
-              <input
-                type="file"
-                accept=".pdf"
-                id="modal-pdf"
-                className="hidden"
-                onChange={handleCustomFileUpload}
+            <div className="mb-2">
+              <CloudinaryUploadBox
+                onUploadComplete={(meta) => {
+                  setCloudinaryMetadata(meta);
+                  const mockPageCount = Math.floor(Math.random() * 35) + 18;
+                  const mockColorCount = Math.floor(mockPageCount * 0.25);
+                  setCustomFile({
+                    id: 'custom-' + Date.now(),
+                    name: meta.original_filename,
+                    size: (meta.bytes / (1024 * 1024)).toFixed(1) + ' MB',
+                    pages: mockPageCount,
+                    colorPagesCount: mockColorCount,
+                    bwPagesCount: mockPageCount - mockColorCount,
+                    type: 'Dokumen Kustom (Cloudinary CDN)',
+                    cloudinary: meta
+                  });
+                }}
               />
-              <label htmlFor="modal-pdf" className="cursor-pointer flex items-center justify-center space-x-2">
-                <Upload className="w-4 h-4 text-sky-600" />
-                <span className="font-bold text-sky-600 hover:underline">
-                  Unggah File PDF dari Laptop / HP Anda
-                </span>
-              </label>
             </div>
 
             <div className="mt-2 p-2.5 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-between">
