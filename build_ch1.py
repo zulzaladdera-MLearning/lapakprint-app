@@ -193,6 +193,97 @@ def add_cover_and_frontmatter(doc):
 
     doc.add_page_break()
 
+    # ================= DAFTAR TABEL =================
+    add_h1(doc, "DAFTAR TABEL")
+    
+    tables_list = [
+        ("Tabel 1.1: Matriks Formulasi Strategis 5W + 1H Ekosistem LapakPrint", "3"),
+        ("Tabel 1.2: Perumusan Masalah, Akar Penyebab, dan Solusi Rekayasa Sistem", "5"),
+        ("Tabel 1.3: Target Capaian Kinerja dan Luaran Nyata (Deliverables) Proyek", "6"),
+        ("Tabel 2.1: Business Model Canvas (BMC) 9 Blok Terpadu Platform LapakPrint", "8"),
+        ("Tabel 2.2: Lean Canvas Formulasi Solusi, Metrik Kunci, dan Unfair Advantage", "11"),
+        ("Tabel 2.3: Analisis Kelayakan Finansial dan Unit Economics per Transaksi", "13"),
+        ("Tabel 2.4: Matriks Diferensiasi Nilai dan Retensi Pengguna Mahasiswa", "15"),
+        ("Tabel 3.1: Matriks Komparasi Benchmarking 5 Model Aplikasi Percetakan", "16"),
+        ("Tabel 3.2: Sintesis Kajian Pustaka Ilmiah dan State-of-the-Art (5 Jurnal)", "19"),
+        ("Tabel 3.3: Komparasi Keunggulan Arsitektur Sistem Terdistribusi", "23"),
+        ("Tabel 4.1: Taksonomi Komprehensif Ekosistem Tech Stack LapakPrint (19 Instrumen)", "24"),
+        ("Tabel 4.2: Alokasi Arsitektur Penyimpanan Hybrid (Supabase vs Cloudinary CDN)", "29"),
+        ("Tabel 4.3: Matriks Manajemen Risiko dan Mitigasi Keamanan Siber", "33"),
+        ("Tabel 4.4: Konfigurasi Kluster 4 Kontainer Multi-Service Docker Compose", "34"),
+        ("Tabel 5.1: Matriks Profil Pengguna (User Personas & Role Matrix)", "36"),
+        ("Tabel 5.2: Spesifikasi Kebutuhan Fungsional Mahasiswa (FR-01 s.d. FR-08)", "38"),
+        ("Tabel 5.3: Spesifikasi Kebutuhan Fungsional Mitra Toko & Admin (FR-09 s.d. FR-15)", "40"),
+        ("Tabel 5.4: Spesifikasi Kebutuhan Non-Fungsional (Performance, Security, NFR)", "41"),
+        ("Tabel 5.5: Skema Basis Data Relasional PostgreSQL Supabase", "43"),
+        ("Tabel 5.6: Spesifikasi Kontrak Antarmuka API dan Webhook RESTful", "45"),
+        ("Tabel 5.7: Spesifikasi Skenario Pengujian Behaviour-Driven Development (BDD / Gherkin)", "46"),
+        ("Tabel 6.1: Dekomposisi Arsitektur Monolit ke Feature-Driven Modules (< 500 Baris)", "48"),
+        ("Tabel 6.2: Matriks Evaluasi User Acceptance Testing (UAT) Komprehensif (15 Kasus Uji)", "52"),
+        ("Tabel 7.1: Matriks Capaian Output Kunci vs Target Rencana Proyek", "54"),
+        ("Tabel 7.2: Roadmap Pengembangan Jangka Pendek, Menengah, dan Panjang (Q1–Q4)", "56")
+    ]
+    
+    t_tbl = doc.add_table(rows=len(tables_list), cols=2)
+    t_tbl.alignment = WD_TABLE_ALIGNMENT.CENTER
+    for idx, (t_name, t_page) in enumerate(tables_list):
+        c0 = t_tbl.rows[idx].cells[0]
+        c1 = t_tbl.rows[idx].cells[1]
+        c0.width = Inches(5.5)
+        c1.width = Inches(0.8)
+        p0 = c0.paragraphs[0]
+        p1 = c1.paragraphs[0]
+        p0.paragraph_format.space_before = Pt(2)
+        p0.paragraph_format.space_after = Pt(2)
+        p1.paragraph_format.space_before = Pt(2)
+        p1.paragraph_format.space_after = Pt(2)
+        p1.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        r0 = p0.add_run(t_name)
+        apply_tnr_run(r0, size_pt=10)
+        r1 = p1.add_run(t_page)
+        apply_tnr_run(r1, size_pt=10)
+        
+    doc.add_page_break()
+
+    # ================= DAFTAR GAMBAR =================
+    add_h1(doc, "DAFTAR GAMBAR")
+    
+    figures_list = [
+        ("Gambar 6.1: Antarmuka Beranda Web Production LapakPrint di Vercel", "49"),
+        ("Gambar 6.2: Katalog Produk Lengkap & Formulir Pemesanan Cetak", "49"),
+        ("Gambar 6.3: Tampilan Layanan Khusus Jilid Hardcover Skripsi Berstandar Universitas", "50"),
+        ("Gambar 6.4: Modal Pembayaran Nontunai LapakPay Wallet dan Integrasi Dynamic QRIS", "50"),
+        ("Gambar 6.5: Halaman Profil Mahasiswa dengan Tombol Unduh Installer Native Android APK", "50"),
+        ("Gambar 6.6: Tampilan Aplikasi Native Android LapakPrint.apk Terpasang di Smartphone Fisik", "50"),
+        ("Gambar 6.7: Kluster 4 Kontainer Aktif di Aplikasi Docker Desktop (Grup lapakprint)", "51"),
+        ("Gambar 6.8: Dashboard 9router Menampilkan Status Akun Google Antigravity OAuth Active", "51"),
+        ("Gambar 6.9: Antarmuka LapakPrint Hermes AI Studio (Open WebUI Port 8080)", "51"),
+        ("Gambar 6.10: Respons Cerdas Model Gemini 3.8 Flash High dengan Fitur Reasoning Thinking", "52"),
+        ("Gambar 6.11: Jendela Monitoring Sesi Online dan Trafik Publik Ngrok Tunnel (Port 4040)", "52"),
+        ("Gambar 6.12: Repositori Publik GitHub LapakPrint dengan Pipeline CI/CD Vercel Terhubung", "52")
+    ]
+    
+    t_fig = doc.add_table(rows=len(figures_list), cols=2)
+    t_fig.alignment = WD_TABLE_ALIGNMENT.CENTER
+    for idx, (f_name, f_page) in enumerate(figures_list):
+        c0 = t_fig.rows[idx].cells[0]
+        c1 = t_fig.rows[idx].cells[1]
+        c0.width = Inches(5.5)
+        c1.width = Inches(0.8)
+        p0 = c0.paragraphs[0]
+        p1 = c1.paragraphs[0]
+        p0.paragraph_format.space_before = Pt(3)
+        p0.paragraph_format.space_after = Pt(3)
+        p1.paragraph_format.space_before = Pt(3)
+        p1.paragraph_format.space_after = Pt(3)
+        p1.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+        r0 = p0.add_run(f_name)
+        apply_tnr_run(r0, size_pt=10)
+        r1 = p1.add_run(f_page)
+        apply_tnr_run(r1, size_pt=10)
+        
+    doc.add_page_break()
+
 def add_chapter_1(doc):
     # ================= BAB I =================
     add_h1(doc, "BAB I: PENDAHULUAN DAN ANALISIS STRATEGIS 5W + 1H")

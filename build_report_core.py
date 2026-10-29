@@ -152,43 +152,101 @@ def create_table_custom(doc, headers, data, col_widths=None, header_bg="0284C7",
     p_spacer.paragraph_format.space_after = Pt(6)
     return table
 
-def create_screenshot_box(doc, image_number, caption, description):
-    table = doc.add_table(rows=1, cols=1)
-    table.alignment = WD_TABLE_ALIGNMENT.CENTER
-    cell = table.cell(0, 0)
-    set_cell_background(cell, "F8FAFC")
-    set_cell_margins(cell, top=140, bottom=140, left=200, right=200)
-    
-    tcPr = cell._tc.get_or_add_tcPr()
-    borders = parse_xml(f'''
-        <w:tcBorders {nsdecls("w")}>
-            <w:top w:val="dashed" w:sz="6" w:space="0" w:color="94A3B8"/>
-            <w:left w:val="dashed" w:sz="6" w:space="0" w:color="94A3B8"/>
-            <w:bottom w:val="dashed" w:sz="6" w:space="0" w:color="94A3B8"/>
-            <w:right w:val="dashed" w:sz="6" w:space="0" w:color="94A3B8"/>
-        </w:tcBorders>
-    ''')
-    tcPr.append(borders)
-    
-    p = cell.paragraphs[0]
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.paragraph_format.space_before = Pt(12)
-    p.paragraph_format.space_after = Pt(4)
-    
-    r_icon = p.add_run("📷\n")
-    apply_tnr_run(r_icon, size_pt=20)
-    
-    r_ph = p.add_run("[ TEMPELKAN TANGKAPAN LAYAR DI SINI ]\n")
-    apply_tnr_run(r_ph, size_pt=11, bold=True, color_rgb=RGBColor(30, 41, 59))
-    
-    r_desc = p.add_run(f"({description})\n")
-    apply_tnr_run(r_desc, size_pt=9.5, italic=True, color_rgb=RGBColor(100, 116, 139))
-    
-    p_cap = doc.add_paragraph()
-    p_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p_cap.paragraph_format.space_before = Pt(4)
-    p_cap.paragraph_format.space_after = Pt(12)
-    r_cap = p_cap.add_run(f"Gambar {image_number}: {caption}")
-    apply_tnr_run(r_cap, size_pt=9.5, bold=True, color_rgb=RGBColor(71, 85, 105))
+def create_screenshot_box(doc, image_number, caption, description, image_path=None):
+    import os
+    if image_path and os.path.exists(image_path):
+        # Hitung rasio gambar agar tidak melebihi batas halaman
+        try:
+            from PIL import Image
+            with Image.open(image_path) as im:
+                w_px, h_px = im.size
+                aspect = h_px / w_px
+                if aspect > 1.3:
+                    # Format potret (misal screenshot mobile)
+                    img_w = Inches(2.7)
+                elif aspect > 0.7:
+                    img_w = Inches(4.8)
+                else:
+                    # Format lanskap (desktop / dashboard)
+                    img_w = Inches(5.6)
+        except Exception:
+            img_w = Inches(5.5)
+
+        table = doc.add_table(rows=1, cols=1)
+        table.alignment = WD_TABLE_ALIGNMENT.CENTER
+        cell = table.cell(0, 0)
+        set_cell_background(cell, "FFFFFF")
+        set_cell_margins(cell, top=80, bottom=80, left=80, right=80)
+        
+        tcPr = cell._tc.get_or_add_tcPr()
+        borders = parse_xml(f'''
+            <w:tcBorders {nsdecls("w")}>
+                <w:top w:val="single" w:sz="6" w:space="0" w:color="CBD5E1"/>
+                <w:left w:val="single" w:sz="6" w:space="0" w:color="CBD5E1"/>
+                <w:bottom w:val="single" w:sz="6" w:space="0" w:color="CBD5E1"/>
+                <w:right w:val="single" w:sz="6" w:space="0" w:color="CBD5E1"/>
+            </w:tcBorders>
+        ''')
+        tcPr.append(borders)
+        
+        p = cell.paragraphs[0]
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.space_before = Pt(4)
+        p.paragraph_format.space_after = Pt(4)
+        run_img = p.add_run()
+        run_img.add_picture(image_path, width=img_w)
+        
+        p_cap = doc.add_paragraph()
+        p_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_cap.paragraph_format.space_before = Pt(6)
+        p_cap.paragraph_format.space_after = Pt(2)
+        r_cap = p_cap.add_run(f"Gambar {image_number}: {caption}")
+        apply_tnr_run(r_cap, size_pt=9.5, bold=True, color_rgb=RGBColor(30, 41, 59))
+        
+        if description:
+            p_desc = doc.add_paragraph()
+            p_desc.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p_desc.paragraph_format.space_before = Pt(0)
+            p_desc.paragraph_format.space_after = Pt(12)
+            r_desc = p_desc.add_run(f"({description})")
+            apply_tnr_run(r_desc, size_pt=8.5, italic=True, color_rgb=RGBColor(100, 116, 139))
+    else:
+        table = doc.add_table(rows=1, cols=1)
+        table.alignment = WD_TABLE_ALIGNMENT.CENTER
+        cell = table.cell(0, 0)
+        set_cell_background(cell, "F8FAFC")
+        set_cell_margins(cell, top=140, bottom=140, left=200, right=200)
+        
+        tcPr = cell._tc.get_or_add_tcPr()
+        borders = parse_xml(f'''
+            <w:tcBorders {nsdecls("w")}>
+                <w:top w:val="dashed" w:sz="6" w:space="0" w:color="94A3B8"/>
+                <w:left w:val="dashed" w:sz="6" w:space="0" w:color="94A3B8"/>
+                <w:bottom w:val="dashed" w:sz="6" w:space="0" w:color="94A3B8"/>
+                <w:right w:val="dashed" w:sz="6" w:space="0" w:color="94A3B8"/>
+            </w:tcBorders>
+        ''')
+        tcPr.append(borders)
+        
+        p = cell.paragraphs[0]
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.paragraph_format.space_before = Pt(12)
+        p.paragraph_format.space_after = Pt(4)
+        
+        r_icon = p.add_run("📷\n")
+        apply_tnr_run(r_icon, size_pt=20)
+        
+        r_ph = p.add_run("[ TEMPELKAN TANGKAPAN LAYAR DI SINI ]\n")
+        apply_tnr_run(r_ph, size_pt=11, bold=True, color_rgb=RGBColor(30, 41, 59))
+        
+        r_desc = p.add_run(f"({description})\n")
+        apply_tnr_run(r_desc, size_pt=9.5, italic=True, color_rgb=RGBColor(100, 116, 139))
+        
+        p_cap = doc.add_paragraph()
+        p_cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p_cap.paragraph_format.space_before = Pt(4)
+        p_cap.paragraph_format.space_after = Pt(12)
+        r_cap = p_cap.add_run(f"Gambar {image_number}: {caption}")
+        apply_tnr_run(r_cap, size_pt=9.5, bold=True, color_rgb=RGBColor(71, 85, 105))
 
 print("Report generator core loaded.")

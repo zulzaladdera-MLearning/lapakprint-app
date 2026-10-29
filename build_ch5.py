@@ -95,6 +95,33 @@ def add_chapter_5(doc):
     add_bullet(doc, "POST /v1/chat/completions (9router Gateway) — Mengirimkan prompt percakapan dengan header Authorization Bearer sk-0480ac...; mengembalikan streaming teks penalaran model Gemini 3.8 Flash High.", "2. Endpoint Konsultasi AI Gateway: ")
     add_bullet(doc, "POST /api/v1/ai/generate-poster — Menerima prompt hasil analisis Gemini Vision; meneruskan ke Runware API untuk me-render poster FLUX; mengembalikan secure_url poster gambar beresolusi 300 DPI.", "3. Endpoint Multimodal Poster Synthesis: ")
 
+    add_h2(doc, "5.6 Spesifikasi Pengujian Behaviour-Driven Development (BDD / Gherkin)")
+    add_p(doc,
+        "Untuk menjamin ketepatan implementasi fitur di lapangan dan memudahkan verifikasi pengujian otomatis, "
+        "kebutuhan fungsional utama dijabarkan ke dalam skenario Behaviour-Driven Development (BDD) menggunakan sintaks Gherkin standar:"
+    )
+
+    headers_bdd = ["Skenario BDD (Gherkin)", "Modul Sistem", "Prekondisi & Langkah Eksekusi (Given-When)", "Hasil yang Diharapkan (Then)"]
+    data_bdd = [
+        ["Skenario 1: Kalkulasi Biaya Cetak Skripsi Hardcover", "Customer Wizard",
+         "Given: Mahasiswa mengunggah file naskah skripsi 120 halaman.\nWhen: Mahasiswa memilih kertas HVS 80 gsm, jilid Hardcover Biru Tua, tinta emas, dan 2 rangkap.",
+         "Then: Sistem menampilkan kalkulasi instan Rp170.000 (2 x Rp85.000) dan mengaktifkan tombol 'Lanjut ke Pembayaran' tanpa refresh halaman."],
+        ["Skenario 2: Pembayaran Instan via Dompet Digital LapakPay", "LapakPay Wallet",
+         "Given: Saldo dompet LapakPay mahasiswa sebesar Rp250.000 dan tagihan pesanan Rp170.000.\nWhen: Mahasiswa memilih metode 'LapakPay' dan mengklik 'Bayar Sekarang'.",
+         "Then: Saldo berkurang menjadi Rp80.000 secara atomik, status pesanan beralih ke 'Paid', dan kode PIN 6 digit diterbitkan."],
+        ["Skenario 3: Pembayaran Menggunakan Dynamic QRIS Escrow", "QRIS Escrow Engine",
+         "Given: Mahasiswa tidak memiliki saldo dompet LapakPay yang cukup.\nWhen: Mahasiswa memilih metode 'QRIS Dynamic'.",
+         "Then: Sistem menghasilkan barcode QRIS dinamis bernilai tepat sesuai tagihan, memulai countdown 15 menit, dan memverifikasi mutasi."],
+        ["Skenario 4: Konsultasi Cetak dengan Failover Otomatis", "AI Studio / aiRouter",
+         "Given: Kuota primary provider 9router mencapai rate limit (HTTP 429).\nWhen: Mahasiswa mengirimkan pertanyaan konsultasi spesifikasi jilid.",
+         "Then: Router secara transparan mengalihkan permintaan ke xKiro Gateway dalam sub-detik tanpa memunculkan pesan kendala di layar."],
+        ["Skenario 5: Pembaruan Status Produksi oleh Mitra Toko", "Seller Dashboard",
+         "Given: Operator mitra toko menerima pesanan cetak skripsi berstatus 'Paid'.\nWhen: Operator mengklik 'Mulai Cetak' lalu 'Selesai Dicetak'.",
+         "Then: Status pesanan di HP mahasiswa langsung terupdate menjadi 'Ready for Pickup' disertai petunjuk loket pengambilan."]
+    ]
+    col_w_bdd = [Inches(1.8), Inches(1.3), Inches(2.1), Inches(1.8)]
+    create_table_custom(doc, headers_bdd, data_bdd, col_w_bdd)
+
     doc.add_page_break()
     print("Chapter 5 completed successfully.")
 
