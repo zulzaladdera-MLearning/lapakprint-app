@@ -6,7 +6,7 @@ import docx
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT
-from build_report_core import apply_tnr_run, add_p, add_h1, add_h2, add_h3, add_bullet, create_table_custom
+from build_report_core import apply_tnr_run, add_p, add_h1, add_h2, add_h3, add_bullet, create_table_custom, create_screenshot_box
 
 def add_chapter_4(doc):
     # ================= BAB IV =================
@@ -55,6 +55,14 @@ def add_chapter_4(doc):
     add_bullet(doc, "Mendaftarkan paket Zoho Mail Forever Free Plan yang menyediakan 5 kotak surat bisnis gratis selamanya. Melakukan verifikasi domain via TXT Record, menambahkan 3 MX Record Zoho, serta menyematkan SPF (v=spf1 include:zoho.com ~all) dan DKIM TXT Record agar email resmi tidak pernah masuk ke folder spam.", "3. Konfigurasi Email Bisnis Kustom Zoho: ")
     add_bullet(doc, "Banyak platform cloud AI mutakhir (termasuk Runware) menolak pendaftaran menggunakan alamat email gratisan publik (@gmail.com atau @yahoo.com) untuk mencegah penyalahgunaan bot, namun memberikan sambutan berupa kredit awal $2 hingga program developer/startup bernilai $1.000 API balance jika mendaftar menggunakan email berdomain bisnis resmi (@lapakprint.my.id). Kredit ini kemudian dimanfaatkan sepenuhnya untuk mentenagai fitur auto-generate poster dan upscaler gambar dokumen tanpa mengeluarkan modal tunai.", "4. Akselerasi Developer Credit Runware ($2 s.d. $1.000): ")
 
+    create_screenshot_box(doc, "4.1", "Pengelolaan Zona DNS Domain lapakprint.my.id & Mapping Vercel Edge Server", 
+                          "Tangkapan layar dashboard DNS Zone Management menampilkan konfigurasi A Record 76.76.21.21, CNAME www, serta MX dan TXT SPF/DKIM Zoho Mail.", 
+                          "screenshot_domain_dns.png")
+
+    create_screenshot_box(doc, "4.2", "Kotak Masuk Zoho Mail & Persetujuan Kredit Developer Program Runware $1.000", 
+                          "Tangkapan layar inbox admin@lapakprint.my.id yang membuktikan alur pendaftaran domain bisnis kustom untuk membuka kuota API senilai $1.000.", 
+                          "screenshot_zoho_mail.png")
+
     add_h2(doc, "4.3 Arsitektur Penyimpanan Hybrid (Supabase 1 GB + Cloudinary 5 GB)")
     add_p(doc,
         "Salah satu kendala paling kritis dalam merancang platform percetakan on-demand adalah ukuran berkas dokumen cetak. "
@@ -79,6 +87,14 @@ def add_chapter_4(doc):
     col_w_stor = [Inches(1.8), Inches(1.5), Inches(1.3), Inches(1.1), Inches(1.4)]
     create_table_custom(doc, headers_stor, data_stor, col_w_stor)
 
+    create_screenshot_box(doc, "4.3", "Implementasi Basis Data Relasional PostgreSQL di Supabase (Tabel orders)", 
+                          "Tangkapan layar Supabase console menampilkan tabel public.orders dengan pointer file_cloudinary_url dan kebijakan Row Level Security aktif.", 
+                          "screenshot_supabase_db.png")
+
+    create_screenshot_box(doc, "4.4", "Konsol Penyimpanan Cloudinary CDN 5 GB (Hybrid Storage Tier)", 
+                          "Tangkapan layar Media Library Cloudinary menampilkan alokasi kuota 5 GB, preset lapakprint_docs, dan direktori berkas PDF skripsi mahasiswa.", 
+                          "screenshot_cloudinary_cdn.png")
+
     add_h2(doc, "4.4 Orkestrasi AI Terdistribusi & Round-Robin Load Balancing")
     add_p(doc,
         "Untuk menjamin ketersediaan sistem kecerdasan buatan (*High Availability AI*) tanpa pernah mengalami downtime "
@@ -96,6 +112,14 @@ def add_chapter_4(doc):
     add_bullet(doc, "Layanan cloud API berkecepatan tinggi untuk model open-weights berdaya komputasi besar (Qwen/Qwen2.5-7B-Instruct) melalui https://api.siliconflow.cn/v1.", "• Prioritas 4 (Cloud Failover 3 - SiliconFlow): ")
     add_bullet(doc, "Jika koneksi internet kampus mengalami pemadaman total (offline), sistem secara mulus beralih ke mesin inferensi lokal: Ollama host pada port 11434 (model hermes3:3b dari Nous Research) atau LMStudio pada port 1234. Pengguna tetap dapat berkonsultasi secara 100% lokal tanpa pulsa/kuota.", "• Prioritas 5 (Local Offline Engine - Ollama & LMStudio): ")
     add_bullet(doc, "Jika seluruh rute jaringan dan socket lokal tidak merespons, modul internal mengaktifkan algoritma penalaran bawaan terpasang (LapakPrint Hermes Smart Engine) yang menghasilkan kalkulasi estimasi cetak secara deterministik dalam 120 ms.", "• Prioritas 6 (Smart Built-in Assistant Fallback): ")
+
+    create_screenshot_box(doc, "4.5", "Matriks Gateway AI Multi-Provider Terdistribusi (SiliconFlow, OpenRouter, Gemini, xKiro)", 
+                          "Tangkapan layar matriks pemantauan health check rute multi-cloud AI dengan latensi sub-detik dan garansi ketersediaan 99.9% SLA.", 
+                          "screenshot_multi_ai_gateway.png")
+
+    create_screenshot_box(doc, "4.6", "Terminal CLI Mesin Inferensi AI Lokal (Host Ollama & Server LM Studio)", 
+                          "Tangkapan layar Windows PowerShell menjalankan ollama list dengan model hermes3:3b serta LM Studio server start di port 1234 dengan CORS aktif.", 
+                          "screenshot_ollama_terminal.png")
 
     add_h3(doc, "4.4.1 Pipeline Multimodal Generatif: 'Baca di Gemini Vision ➔ Buat di Runware'")
     add_p(doc,
@@ -119,6 +143,14 @@ def add_chapter_4(doc):
         "pratinjau di layar smartphone mahasiswa bersama kalkulasi biaya cetak poster tersebut."
     )
 
+    create_screenshot_box(doc, "4.7", "Studio API Runware & Benchmark Kecepatan Difusi FLUX.1 (Sub-2s)", 
+                          "Tangkapan layar dashboard Runware AI Studio menampilkan saldo developer grant $1.002, kecepatan render 1.12 detik, dan resolusi 300 DPI.", 
+                          "screenshot_runware_api.png")
+
+    create_screenshot_box(doc, "4.8", "Pipeline Multimodal Round-Robin Studio: Gemini Vision ke Runware FLUX", 
+                          "Tangkapan layar alur kerja berantai pembacaan sketsa pamflet menggunakan Gemini Vision dan sintesis poster HD menggunakan Runware FLUX.1.", 
+                          "screenshot_multimodal_roundrobin.png")
+
     add_h2(doc, "4.5 Kontainerisasi Multi-Service Docker Compose Stack")
     add_p(doc,
         "Untuk mempermudah replikasi sistem pada komputer server penguji, dewan juri, maupun lingkungan produksi, "
@@ -129,6 +161,26 @@ def add_chapter_4(doc):
     add_bullet(doc, "Berjalan pada image decolua/9router:latest (port internal 20128, port eksternal host 20129). Mengelola kredensial OAuth Antigravity dan menerjemahkan panggilan API OpenAI ke penyedia LLM.", "2. Container nine-router: ")
     add_bullet(doc, "Berjalan pada image ghcr.io/open-webui/open-webui:main (port 8080). Menyediakan antarmuka web modern bergaya ChatGPT yang terhubung langsung ke nine-router melalui jaringan internal bridge `lapakprint-net`.", "3. Container hermes-webui: ")
     add_bullet(doc, "Berjalan pada image ngrok/ngrok:latest (port monitoring 4040). Menghubungkan port 8080 hermes-webui ke internet publik menggunakan domain statis HTTPS https://appealing-issue-shimmer.ngrok-free.dev.", "4. Container lapakprint-ngrok: ")
+
+    create_screenshot_box(doc, "4.9", "Kluster 4 Kontainer Aktif di Aplikasi Docker Desktop (Grup lapakprint)", 
+                          "Tangkapan layar Docker Desktop yang memperlihatkan 4 container hijau: hermes-service, nine-router, hermes-webui, dan lapakprint-ngrok.", 
+                          "Docker terhadap Ngrok, Hermes, dan 9router.png")
+
+    create_screenshot_box(doc, "4.10", "Dashboard 9router Menampilkan Status Akun Google Antigravity OAuth Active", 
+                          "Tangkapan layar antarmuka 9router di localhost:20129 menampilkan akun ladderazulza@gmail.com berstatus Active dan OAuth.", 
+                          "screenshot_9router_20129.png")
+
+    create_screenshot_box(doc, "4.11", "Antarmuka LapakPrint Hermes AI Studio (Open WebUI Port 8080)", 
+                          "Tangkapan layar antarmuka obrolan bergaya ChatGPT di localhost:8080 terhubung ke gateway internal 9router.", 
+                          "Hermes terintegrasi docker.png")
+
+    create_screenshot_box(doc, "4.12", "Respons Cerdas Model Gemini 3.8 Flash High dengan Fitur Reasoning Thinking", 
+                          "Tangkapan layar sesi penalaran AI di Open WebUI yang memperlihatkan penalaran mendalam dan solusi percetakan kampus.", 
+                          "screenshot_webui_8080.png")
+
+    create_screenshot_box(doc, "4.13", "Jendela Monitoring Sesi Online dan Trafik Publik Ngrok Tunnel (Port 4040)", 
+                          "Tangkapan layar dashboard web Ngrok di localhost:4040 menampilkan status Online dan public URL appealing-issue-shimmer.ngrok-free.dev.", 
+                          "screenshot_ngrok_4040.png")
 
     add_h2(doc, "4.6 Arsitektur Keamanan Siber, Sanitasi Berkas, & Enkripsi Data Transaksi")
     add_p(doc,

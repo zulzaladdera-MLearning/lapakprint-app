@@ -6,7 +6,7 @@ import docx
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT
-from build_report_core import apply_tnr_run, add_p, add_h1, add_h2, add_h3, add_bullet, create_table_custom
+from build_report_core import apply_tnr_run, add_p, add_h1, add_h2, add_h3, add_bullet, create_table_custom, create_screenshot_box
 
 def add_chapter_5(doc):
     # ================= BAB V =================
@@ -29,6 +29,10 @@ def add_chapter_5(doc):
     ]
     col_w_persona = [Inches(1.5), Inches(1.8), Inches(1.8), Inches(1.9)]
     create_table_custom(doc, headers_persona, data_persona, col_w_persona)
+
+    create_screenshot_box(doc, "5.1", "Kerangka Strategis Knowledge Domain & PRD Framework LapakPrint (30+ Halaman)", 
+                          "Tangkapan layar arsitektur analisis domain memuat sintesis Business Model Canvas 9 blok, Lean Canvas problem-solution, dan analisis 5W+1H.", 
+                          "screenshot_prd_knowledgedomain.png")
 
     add_h2(doc, "5.2 Spesifikasi Kebutuhan Fungsional (Functional Requirements)")
     add_p(doc,
@@ -56,6 +60,18 @@ def add_chapter_5(doc):
     ]
     col_w_fr = [Inches(0.7), Inches(1.3), Inches(2.7), Inches(1.8), Inches(0.8)]
     create_table_custom(doc, headers_fr, data_fr, col_w_fr)
+
+    create_screenshot_box(doc, "5.2", "Layanan Khusus Jilid Hardcover Skripsi Berstandar Universitas", 
+                          "Tangkapan layar antarmuka kustomisasi jilid skripsi dengan pilihan beludru biru/marun, hot stamping foil emas, dan pratinjau mockup 3D.", 
+                          "screenshot_skripsi_hardcover.png")
+
+    create_screenshot_box(doc, "5.3", "Modal Pembayaran Nontunai LapakPay Wallet dan Integrasi Dynamic QRIS", 
+                          "Tangkapan layar modal invoice pesanan menampilkan barcode QRIS nasional standar ASPI dan kartu saldo dompet digital kampus LapakPay.", 
+                          "screenshot_lapakpay_qris.png")
+
+    create_screenshot_box(doc, "5.4", "Halaman Profil Mahasiswa dengan Portal Unduh Sideloading APK Native", 
+                          "Tangkapan layar antarmuka profil mahasiswa yang menyediakan tombol unduh langsung LapakPrint.apk v2.4.0 berbasis Capacitor SDK 36.", 
+                          "screenshot_mobile_download.png")
 
     add_h2(doc, "5.3 Spesifikasi Kebutuhan Non-Fungsional (Non-Functional Requirements)")
     add_p(doc,

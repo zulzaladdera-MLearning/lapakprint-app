@@ -233,10 +233,10 @@ def add_cover_and_frontmatter(doc):
         c1.width = Inches(0.8)
         p0 = c0.paragraphs[0]
         p1 = c1.paragraphs[0]
-        p0.paragraph_format.space_before = Pt(2)
-        p0.paragraph_format.space_after = Pt(2)
-        p1.paragraph_format.space_before = Pt(2)
-        p1.paragraph_format.space_after = Pt(2)
+        p0.paragraph_format.space_before = Pt(1.5)
+        p0.paragraph_format.space_after = Pt(1.5)
+        p1.paragraph_format.space_before = Pt(1.5)
+        p1.paragraph_format.space_after = Pt(1.5)
         p1.alignment = WD_ALIGN_PARAGRAPH.RIGHT
         r0 = p0.add_run(t_name)
         apply_tnr_run(r0, size_pt=10)
@@ -249,18 +249,30 @@ def add_cover_and_frontmatter(doc):
     add_h1(doc, "DAFTAR GAMBAR")
     
     figures_list = [
-        ("Gambar 6.1: Antarmuka Beranda Web Production LapakPrint di Vercel", "49"),
-        ("Gambar 6.2: Katalog Produk Lengkap & Formulir Pemesanan Cetak", "49"),
-        ("Gambar 6.3: Tampilan Layanan Khusus Jilid Hardcover Skripsi Berstandar Universitas", "50"),
-        ("Gambar 6.4: Modal Pembayaran Nontunai LapakPay Wallet dan Integrasi Dynamic QRIS", "50"),
-        ("Gambar 6.5: Halaman Profil Mahasiswa dengan Tombol Unduh Installer Native Android APK", "50"),
-        ("Gambar 6.6: Tampilan Aplikasi Native Android LapakPrint.apk Terpasang di Smartphone Fisik", "50"),
-        ("Gambar 6.7: Kluster 4 Kontainer Aktif di Aplikasi Docker Desktop (Grup lapakprint)", "51"),
-        ("Gambar 6.8: Dashboard 9router Menampilkan Status Akun Google Antigravity OAuth Active", "51"),
-        ("Gambar 6.9: Antarmuka LapakPrint Hermes AI Studio (Open WebUI Port 8080)", "51"),
-        ("Gambar 6.10: Respons Cerdas Model Gemini 3.8 Flash High dengan Fitur Reasoning Thinking", "52"),
-        ("Gambar 6.11: Jendela Monitoring Sesi Online dan Trafik Publik Ngrok Tunnel (Port 4040)", "52"),
-        ("Gambar 6.12: Repositori Publik GitHub LapakPrint dengan Pipeline CI/CD Vercel Terhubung", "52")
+        ("Gambar 4.1: Pengelolaan Zona DNS Domain lapakprint.my.id & Mapping Vercel Edge Server", "26"),
+        ("Gambar 4.2: Kotak Masuk Zoho Mail & Persetujuan Kredit Developer Program Runware $1.000", "27"),
+        ("Gambar 4.3: Implementasi Basis Data Relasional PostgreSQL di Supabase (Tabel orders)", "28"),
+        ("Gambar 4.4: Konsol Penyimpanan Cloudinary CDN 5 GB (Hybrid Storage Tier)", "28"),
+        ("Gambar 4.5: Matriks Gateway AI Multi-Provider Terdistribusi (SiliconFlow, OpenRouter, Gemini)", "30"),
+        ("Gambar 4.6: Terminal CLI Mesin Inferensi AI Lokal (Host Ollama & Server LM Studio)", "31"),
+        ("Gambar 4.7: Studio API Runware & Benchmark Kecepatan Difusi FLUX.1 (Sub-2s)", "32"),
+        ("Gambar 4.8: Pipeline Multimodal Round-Robin Studio: Gemini Vision ke Runware FLUX", "33"),
+        ("Gambar 4.9: Kluster 4 Kontainer Aktif di Aplikasi Docker Desktop (Grup lapakprint)", "34"),
+        ("Gambar 4.10: Dashboard 9router Menampilkan Status Akun Google Antigravity OAuth Active", "34"),
+        ("Gambar 4.11: Antarmuka LapakPrint Hermes AI Studio (Open WebUI Port 8080)", "35"),
+        ("Gambar 4.12: Respons Cerdas Model Gemini 3.8 Flash High dengan Fitur Reasoning Thinking", "35"),
+        ("Gambar 4.13: Jendela Monitoring Sesi Online dan Trafik Publik Ngrok Tunnel (Port 4040)", "36"),
+        ("Gambar 5.1: Kerangka Strategis Knowledge Domain & PRD Framework LapakPrint (30+ Halaman)", "37"),
+        ("Gambar 5.2: Layanan Khusus Jilid Hardcover Skripsi Berstandar Universitas", "39"),
+        ("Gambar 5.3: Modal Pembayaran Nontunai LapakPay Wallet dan Integrasi Dynamic QRIS", "39"),
+        ("Gambar 5.4: Halaman Profil Mahasiswa dengan Portal Unduh Sideloading APK Native", "40"),
+        ("Gambar 6.1: Antigravity Coding Agent Harness — Autonomous Orchestrator", "43"),
+        ("Gambar 6.2: Workspace Cursor AI IDE Berbasis Feature-Driven Architecture", "44"),
+        ("Gambar 6.3: Verifikasi Audit Clean Code Refaktorisasi FDA (< 500 Baris)", "44"),
+        ("Gambar 6.4: Antarmuka Beranda Web Production LapakPrint di Vercel", "46"),
+        ("Gambar 6.5: Katalog Produk Lengkap & Formulir Pemesanan Cetak Desktop", "46"),
+        ("Gambar 6.6: Tampilan Aplikasi Native Android LapakPrint.apk Terpasang di Smartphone Fisik", "47"),
+        ("Gambar 6.7: Repositori Publik GitHub LapakPrint dengan Pipeline CI/CD Vercel Terhubung", "47")
     ]
     
     t_fig = doc.add_table(rows=len(figures_list), cols=2)
@@ -272,10 +284,10 @@ def add_cover_and_frontmatter(doc):
         c1.width = Inches(0.8)
         p0 = c0.paragraphs[0]
         p1 = c1.paragraphs[0]
-        p0.paragraph_format.space_before = Pt(3)
-        p0.paragraph_format.space_after = Pt(3)
-        p1.paragraph_format.space_before = Pt(3)
-        p1.paragraph_format.space_after = Pt(3)
+        p0.paragraph_format.space_before = Pt(1.5)
+        p0.paragraph_format.space_after = Pt(1.5)
+        p1.paragraph_format.space_before = Pt(1.5)
+        p1.paragraph_format.space_after = Pt(1.5)
         p1.alignment = WD_ALIGN_PARAGRAPH.RIGHT
         r0 = p0.add_run(f_name)
         apply_tnr_run(r0, size_pt=10)

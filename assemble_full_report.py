@@ -51,8 +51,8 @@ def assemble_master_report():
     normal_style.font.name = 'Times New Roman'
     normal_style.font.size = Pt(12)
     normal_style.font.color.rgb = RGBColor(15, 23, 42)
-    normal_style.paragraph_format.line_spacing = 1.15
-    normal_style.paragraph_format.space_after = Pt(6)
+    normal_style.paragraph_format.line_spacing = 1.12
+    normal_style.paragraph_format.space_after = Pt(3)
 
     # 3. Merakit Seluruh Bab Secara Berurutan
     print("-> Merakit Halaman Judul, Kata Pengantar, Ringkasan Eksekutif, & Daftar Isi...")

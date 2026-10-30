@@ -54,6 +54,18 @@ def add_chapter_6(doc):
         "menggunakan unit testing."
     )
 
+    create_screenshot_box(doc, "6.1", "Antigravity Coding Agent Harness — Autonomous Orchestrator", 
+                          "Tangkapan layar orkestrasi agent otonom Antigravity mengeksekusi tool calling shell, docker bridge, dan code mode verification.", 
+                          "screenshot_antigravity_agent.png")
+
+    create_screenshot_box(doc, "6.2", "Workspace Cursor AI IDE Berbasis Feature-Driven Architecture", 
+                          "Tangkapan layar lingkungan editor Cursor IDE menampilkan struktur pohon direktori src/features/ yang terisolasi dan modular.", 
+                          "screenshot_cursor_ide.png")
+
+    create_screenshot_box(doc, "6.3", "Verifikasi Audit Clean Code Refaktorisasi FDA (< 500 Baris)", 
+                          "Tangkapan layar tabel audit kepatuhan batas baris kode yang memverifikasi seluruh modul baru berada jauh di bawah ambang 500 baris.", 
+                          "screenshot_refactoring_fda.png")
+
     add_h2(doc, "6.2 Evaluasi Pengujian Fungsional Lintas Perangkat (Cross-Device & Cross-Platform)")
     add_p(doc,
         "Pengujian fungsional dilakukan secara ketat pada lingkungan produksi nyata (Production Environment) "
@@ -66,54 +78,24 @@ def add_chapter_6(doc):
     add_h2(doc, "6.3 Dokumentasi Tangkapan Layar Pengujian Sistem (Visual Evidence)")
     add_p(doc,
         "Berikut adalah dokumentasi visual resmi yang merekam keberhasilan orkestrasi dan implementasi "
-        "seluruh komponen ekosistem LapakPrint. Setiap kotak tangkapan layar telah dilengkapi dengan petunjuk "
-        "gambar yang harus disematkan:"
+        "seluruh komponen ekosistem LapakPrint pada lingkungan produksi:"
     )
 
-    create_screenshot_box(doc, "6.1", "Antarmuka Beranda Web Production LapakPrint di Vercel", 
-                          "Tangkapan layar browser membuka https://lapakprint-app.vercel.app menampilkan navigasi Shopee-style, kategori cetak tugas, dan banner promosi kampus.",
-                          image_path="screenshot_vercel_home.png")
+    create_screenshot_box(doc, "6.4", "Antarmuka Beranda Web Production LapakPrint di Vercel", 
+                          "Tangkapan layar browser membuka https://lapakprint-app.vercel.app menampilkan navigasi Shopee-style, kategori cetak tugas, dan banner promosi kampus.", 
+                          "screenshot_vercel_home.png")
     
-    create_screenshot_box(doc, "6.2", "Katalog Produk Lengkap & Formulir Pemesanan Cetak", 
-                          "Tangkapan layar katalog layanan percetakan mahasiswa, estimasi biaya cetak, dan opsi spesifikasi dokumen.",
-                          image_path="screenshot_vercel_full.png")
-    
-    create_screenshot_box(doc, "6.3", "Tampilan Layanan Khusus Jilid Hardcover Skripsi Berstandar Universitas", 
-                          "Tangkapan layar pemilihan warna cover skripsi (Biru Tua/Marun), opsi pita pembatas, dan input judul skripsi timbul emas.")
-    
-    create_screenshot_box(doc, "6.4", "Modal Pembayaran Nontunai LapakPay Wallet dan Integrasi Dynamic QRIS", 
-                          "Tangkapan layar invoice tagihan menampilkan barcode QRIS dinamis dan tombol bayar instan menggunakan saldo dompet digital.")
-    
-    create_screenshot_box(doc, "6.5", "Halaman Profil Mahasiswa dengan Tombol Unduh Installer Native Android APK", 
-                          "Tangkapan layar menu profil pengguna yang menampilkan identitas mahasiswa dan tombol unduh langsung LapakPrint.apk.")
+    create_screenshot_box(doc, "6.5", "Katalog Produk Lengkap & Formulir Pemesanan Cetak Desktop", 
+                          "Tangkapan layar katalog layanan percetakan mahasiswa, estimasi biaya cetak, dan opsi spesifikasi dokumen.", 
+                          "screenshot_vercel_full.png")
     
     create_screenshot_box(doc, "6.6", "Tampilan Aplikasi Native Android LapakPrint.apk Terpasang di Smartphone Fisik", 
-                          "Tangkapan layar ponsel Android fisik yang menjalankan aplikasi LapakPrint secara mandiri berbasis Capacitor SDK 36.",
-                          image_path="screenshot_mobile_home.png")
+                          "Tangkapan layar ponsel Android fisik yang menjalankan aplikasi LapakPrint secara mandiri berbasis Capacitor SDK 36.", 
+                          "screenshot_mobile_home.png")
     
-    create_screenshot_box(doc, "6.7", "Kluster 4 Kontainer Aktif di Aplikasi Docker Desktop (Grup lapakprint)", 
-                          "Tangkapan layar Docker Desktop yang memperlihatkan 4 container hijau: hermes-service, nine-router, hermes-webui, dan ngrok.",
-                          image_path="Docker terhadap Ngrok, Hermes, dan 9router.png")
-    
-    create_screenshot_box(doc, "6.8", "Dashboard 9router Menampilkan Status Akun Google Antigravity OAuth Active", 
-                          "Tangkapan layar antarmuka 9router di localhost:20129 menampilkan akun ladderazulza@gmail.com berstatus Active dan OAuth.",
-                          image_path="screenshot_9router_20129.png")
-    
-    create_screenshot_box(doc, "6.9", "Antarmuka LapakPrint Hermes AI Studio (Open WebUI Port 8080)", 
-                          "Tangkapan layar antarmuka obrolan bergaya ChatGPT di localhost:8080 terhubung ke gateway internal 9router.",
-                          image_path="Hermes terintegrasi docker.png")
-    
-    create_screenshot_box(doc, "6.10", "Respons Cerdas Model Gemini 3.8 Flash High dengan Fitur Reasoning Thinking", 
-                          "Tangkapan layar sesi penalaran AI di Open WebUI yang memperlihatkan penalaran mendalam dan solusi percetakan kampus.",
-                          image_path="screenshot_webui_8080.png")
-    
-    create_screenshot_box(doc, "6.11", "Jendela Monitoring Sesi Online dan Trafik Publik Ngrok Tunnel (Port 4040)", 
-                          "Tangkapan layar dashboard web Ngrok di localhost:4040 menampilkan status Online dan public URL appealing-issue-shimmer.ngrok-free.dev.",
-                          image_path="screenshot_ngrok_4040.png")
-    
-    create_screenshot_box(doc, "6.12", "Repositori Publik GitHub LapakPrint dengan Pipeline CI/CD Vercel Terhubung", 
-                          "Tangkapan layar repositori GitHub github.com/zulzaladdera-MLearning/lapakprint-app menampilkan riwayat commit dan status deploy.",
-                          image_path="screenshot_github.png")
+    create_screenshot_box(doc, "6.7", "Repositori Publik GitHub LapakPrint dengan Pipeline CI/CD Vercel Terhubung", 
+                          "Tangkapan layar repositori GitHub github.com/zulzaladdera-MLearning/lapakprint-app menampilkan riwayat commit dan status deploy.", 
+                          "screenshot_github.png")
 
     add_h2(doc, "6.4 Matriks Evaluasi User Acceptance Testing (UAT) Komprehensif")
     add_p(doc,
